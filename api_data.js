@@ -438,6 +438,296 @@ define({ "api": [
     "groupTitle": "Post_Rant"
   },
   {
+    "type": " patch ",
+    "url": "/rant/post/edit/:rantId",
+    "title": "Edit Rant",
+    "name": "editRant",
+    "group": "Post_Rant",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "rantId",
+            "description": "<p>This rant id should be used as a param which will be represented as req.params, it's the unique identifier for the rant the user wants to edit</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string[]",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Just like in the creating of rants, it represents new values to add in the rant tags</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "rant",
+            "description": "<p>The edited rant</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "when",
+            "description": "<p>The timestamp of when the edition was made</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "      /rant/post/edit/eeee-ffff-0000-9999-gggg\n{\n   rant: \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n   tags: [ \"foo\", \"bar\"],\n   when: 1596978723642\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>HTTP status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Success response object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string[]",
+            "optional": false,
+            "field": "message.tags",
+            "description": "<p>Array of tags for this rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.when",
+            "description": "<p>This property is different from the when property sent when editing a rant, this property represents the time the rant was initially created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message.rantId",
+            "description": "<p>Unique Identifier of rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message.rantPoser",
+            "description": "<p>Username of rant creator</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message.rant",
+            "description": "<p>Edited Rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object[]",
+            "optional": false,
+            "field": "message.rantComments",
+            "description": "<p>comments related to this rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "deleted",
+            "allowedValues": [
+              "false"
+            ],
+            "optional": false,
+            "field": "message.deleted",
+            "description": "<p>This property represents if a rant has been deleted or not</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "message.edit",
+            "description": "<p>The edit property holds information about the edition history of this rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "allowedValues": [
+              "true"
+            ],
+            "optional": false,
+            "field": "message.edit.isEdited",
+            "description": "<p>Identifies if a rant has been deleted or not. Whenever a rant is edited this property is always true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object[]",
+            "optional": false,
+            "field": "message.edit.editHistory",
+            "description": "<p>An array of object that represents the edit history of this rant. Whenever an edit is made on a rant, <code>message.edit.editHistory</code> holds the history of the edit(s) that has been made</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.edit.editHistory.when",
+            "description": "<p>Timestamp of when this edit was made</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object[]",
+            "optional": false,
+            "field": "message.edit.editHistory.diff",
+            "description": "<p>Array of object representing text changes and if that text was added or removed, see https://www.npmjs.com/package/diff#examples</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message.edit.editHistory.diff.value",
+            "description": "<p>The text that was added or removed</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "allowedValues": [
+              "true",
+              "false"
+            ],
+            "optional": false,
+            "field": "message.edit.editHistory.diff.added",
+            "description": "<p>This property can either be true or false depending on <code>message.edit.editHistory.diff.value</code>. If <code>message.edit.editHistory.diff.value</code> is an added text <code>message.edit.editHistory.diff.added</code> will be true but false if <code>message.edit.editHistory.diff.value</code> was removed</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "allowedValues": [
+              "true",
+              "false"
+            ],
+            "optional": false,
+            "field": "message.edit.editHistory.diff.removed",
+            "description": "<p>This property can either be true or false depending on <code>message.edit.editHistory.diff.value</code>. If <code>message.edit.editHistory.diff.value</code> is a removed text <code>message.edit.editHistory.diff.removed</code> will be true but false if <code>message.edit.editHistory.diff.value</code> was added</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message.edit.editHistory.diffAgainst",
+            "description": "<p>The rant that an edit was made on. This value keeps track of what the rant was, before an edition was made on it</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.rantUpVote",
+            "description": "<p>Upvote count of the rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.rantDownVote",
+            "description": "<p>Downvote count of the rant</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 Created\n{\n    status: 201,\n    message  : {\n       tags        : [ \"foo\", \"bar\" ]\n       when        : 1596948381262\n       rantId      : \"eee-ffff-00000-1111-22222\",\n       rantPoster  : \"username\",\n       rant        : \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n       rantComments : [{}],\n       deleted      : false,\n       edit         : {\n          isEdited    : true,\n          editHistory : [\n                { when: 1596978723642 , diff: { value: \"Lorem ipsum\", removed: true, added: false} },\n                { when: 1596978723642 , diff: { value: \"L O\", removed: added: true } } \n           ]\n        diffAgainst: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n       },\n       rantUpVote   : 532,\n       rantDownVote : 7\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_BODY_UNDEFINED",
+            "description": "<p>Rant body data is not defined</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_LENGTH_NOT_MORE_THAN_TWENTY",
+            "description": "<p>Rant cannot be created because it is less than 20</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_TAGS_UNDEFINED",
+            "description": "<p>Tag body data is not defined</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_TAGS_NOT_AN_ARRAY",
+            "description": "<p>Expect an array as rant tags but got</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_WHEN_NO_EXISTS",
+            "description": "<p>A when field is required, it carries the timestamp of when the edit request was made</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_NOT_NUMBER",
+            "description": "<p>when property must be a number</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_NOT_VALID_TIMESTAMP",
+            "description": "<p>Invalid timestamp information passed as value to the when property</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_ID_IS_UNDEFINED",
+            "description": "<p>There is no id specified for the rant to modify</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_DOES_NOT_EXISTS",
+            "description": "<p>The requested rant to modify does not exist</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_HAS_ALREADY_BEEN_DELETED",
+            "description": "<p>Rant has already been deleted</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_NOT_USER",
+            "description": "<p>You are not allowed to modify this rant at this time</p>"
+          }
+        ]
+      }
+    },
+    "filename": "doc/edit-rant.doc.js",
+    "groupTitle": "Post_Rant"
+  },
+  {
     "type": " post ",
     "url": "/register/reg-first-step",
     "title": "First registration step of user",
