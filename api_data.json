@@ -194,30 +194,44 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "message",
+            "description": "<p>success message response</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "string[]",
             "optional": false,
-            "field": "tags",
+            "field": "message.tags",
             "description": "<p>Array of tags the rant is associated with</p>"
           },
           {
             "group": "Success 200",
             "type": "number",
             "optional": false,
-            "field": "when",
+            "field": "message.when",
             "description": "<p>Timestamp that represents the creation time</p>"
           },
           {
             "group": "Success 200",
             "type": "string",
             "optional": false,
-            "field": "rantId",
+            "field": "message.rantId",
             "description": "<p>Unique Identifier for the rant</p>"
           },
           {
             "group": "Success 200",
             "type": "string",
             "optional": false,
-            "field": "rantPoster",
+            "field": "message.rantPoster",
             "description": "<p>Username of rant poster</p>"
           },
           {
@@ -225,14 +239,14 @@
             "type": "string",
             "size": "20..",
             "optional": false,
-            "field": "rant",
+            "field": "message.rant",
             "description": "<p>This is the content the user is posting (the actual rant)</p>"
           },
           {
             "group": "Success 200",
             "type": "object[]",
             "optional": false,
-            "field": "rantComments",
+            "field": "message.rantComments",
             "description": "<p>All comments associated with this rant (but this will be an empty array since this rant has just been created)</p>"
           },
           {
@@ -242,7 +256,7 @@
               "false"
             ],
             "optional": false,
-            "field": "deleted",
+            "field": "message.deleted",
             "description": "<p>This property will be false, but it's used to mark if a rant is deleted or not, since this rant has just been created, this property will default to false</p>"
           },
           {
@@ -252,7 +266,7 @@
               "{}"
             ],
             "optional": false,
-            "field": "edit",
+            "field": "message.edit",
             "description": "<p>This will be an empty object, but the properties of this object keeps track of edition history of the posted rant</p>"
           },
           {
@@ -262,7 +276,7 @@
               "0"
             ],
             "optional": false,
-            "field": "rantUpVote",
+            "field": "message.rantUpVote",
             "description": "<p>Upvote count of the rant</p>"
           },
           {
@@ -272,7 +286,7 @@
               "0"
             ],
             "optional": false,
-            "field": "rantDownVote",
+            "field": "message.rantDownVote",
             "description": "<p>Downvote count of the rant</p>"
           }
         ]
@@ -292,48 +306,135 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "RANT_BODY_UNDEFINED",
-            "description": "<p>&quot;Rant body data is not defined&quot;</p>"
+            "description": "<p>Rant body data is not defined</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "RANT_LENGTH_NOT_MORE_THAN_TWENTY",
-            "description": "<p>&quot;Rant cannot be created because it is less than 20&quot;</p>"
+            "description": "<p>Rant cannot be created because it is less than 20</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "RANT_TAGS_UNDEFINED",
-            "description": "<p>&quot;Tag body data is not defined&quot;</p>"
+            "description": "<p>Tag body data is not defined</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "RANT_TAGS_NOT_AN_ARRAY",
-            "description": "<p>&quot;Expect an array as rant tags but got &quot;</p>"
+            "description": "<p>Expect an array as rant tags but got</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "RANT_WHEN_NO_EXISTS",
-            "description": "<p>&quot;A when field is required, it carries the timestamp of when the edit request was made&quot;</p>"
+            "description": "<p>A when field is required, it carries the timestamp of when the edit request was made</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "RANT_NOT_NUMBER",
-            "description": "<p>&quot;when property must be a number&quot;</p>"
+            "description": "<p>when property must be a number</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "RANT_NOT_VALID_TIMESTAMP",
-            "description": "<p>&quot;Invalid timestamp information passed as value to the when property&quot;</p>"
+            "description": "<p>Invalid timestamp information passed as value to the when property</p>"
           }
         ]
       }
     },
     "filename": "doc/create-rant.doc.js",
+    "groupTitle": "Post_Rant"
+  },
+  {
+    "type": " delete ",
+    "url": "/rant/post/delete/:rantId",
+    "title": "",
+    "name": "deleteRant",
+    "group": "Post_Rant",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "rantId",
+            "description": "<p>The rant unique identifier to delete</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "/rant/post/delete/eeee-0000-ffff-9999",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>http status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "message",
+            "description": "<p>success message response</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 Created\n\n{\n   status  : 200,\n   message : Rant has been deleted succefully\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_ID_IS_UNDEFINED",
+            "description": "<p>There is no id specified for the rant to modify</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_DOES_NOT_EXISTS",
+            "description": "<p>The requested rant to modify does not exist</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_HAS_ALREADY_BEEN_DELETED",
+            "description": "<p>Rant has already been deleted</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_NOT_USER",
+            "description": "<p>You are not allowed to modify this rant at this time</p>"
+          }
+        ]
+      }
+    },
+    "filename": "doc/delete-rant.doc.js",
     "groupTitle": "Post_Rant"
   },
   {
