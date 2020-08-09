@@ -149,6 +149,195 @@ define({ "api": [
   },
   {
     "type": " post ",
+    "url": "/rant/post/create",
+    "title": "Create Rant",
+    "name": "createRant",
+    "group": "Post_Rant",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "size": "20..",
+            "optional": false,
+            "field": "rant",
+            "description": "<p>This is the content the user is posting (the actual rant)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string[]",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Array of tags this rant should be associated with</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "number",
+            "optional": false,
+            "field": "when",
+            "description": "<p>Timestamp that represents the creation time</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n   rant: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n   tags: [ \"foo\", \"bar\"],\n   when: 1596948381262\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "string[]",
+            "optional": false,
+            "field": "tags",
+            "description": "<p>Array of tags the rant is associated with</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "when",
+            "description": "<p>Timestamp that represents the creation time</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "rantId",
+            "description": "<p>Unique Identifier for the rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "rantPoster",
+            "description": "<p>Username of rant poster</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "size": "20..",
+            "optional": false,
+            "field": "rant",
+            "description": "<p>This is the content the user is posting (the actual rant)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object[]",
+            "optional": false,
+            "field": "rantComments",
+            "description": "<p>All comments associated with this rant (but this will be an empty array since this rant has just been created)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "allowedValues": [
+              "false"
+            ],
+            "optional": false,
+            "field": "deleted",
+            "description": "<p>This property will be false, but it's used to mark if a rant is deleted or not, since this rant has just been created, this property will default to false</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "allowedValues": [
+              "{}"
+            ],
+            "optional": false,
+            "field": "edit",
+            "description": "<p>This will be an empty object, but the properties of this object keeps track of edition history of the posted rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "allowedValues": [
+              "0"
+            ],
+            "optional": false,
+            "field": "rantUpVote",
+            "description": "<p>Upvote count of the rant</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "allowedValues": [
+              "0"
+            ],
+            "optional": false,
+            "field": "rantDownVote",
+            "description": "<p>Downvote count of the rant</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 Created\n{\n    status: 201,\n    message  : {\n       tags        : [ \"foo\", \"bar\" ]\n       when        : 1596948381262\n       rantId      : \"eee-ffff-00000-1111-22222\",\n       rantPoster  : \"username\",\n       rant        : \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n       rantComments : [{}],\n       deleted      : false,\n       edit         : {},\n       rantUpVote   : 0,\n       rantDownVote : 0\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_BODY_UNDEFINED",
+            "description": "<p>&quot;Rant body data is not defined&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_LENGTH_NOT_MORE_THAN_TWENTY",
+            "description": "<p>&quot;Rant cannot be created because it is less than 20&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_TAGS_UNDEFINED",
+            "description": "<p>&quot;Tag body data is not defined&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_TAGS_NOT_AN_ARRAY",
+            "description": "<p>&quot;Expect an array as rant tags but got &quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_WHEN_NO_EXISTS",
+            "description": "<p>&quot;A when field is required, it carries the timestamp of when the edit request was made&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_NOT_NUMBER",
+            "description": "<p>&quot;when property must be a number&quot;</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_NOT_VALID_TIMESTAMP",
+            "description": "<p>&quot;Invalid timestamp information passed as value to the when property&quot;</p>"
+          }
+        ]
+      }
+    },
+    "filename": "doc/create-rant.doc.js",
+    "groupTitle": "Post_Rant"
+  },
+  {
+    "type": " post ",
     "url": "/register/reg-first-step",
     "title": "First registration step of user",
     "name": "firstRegStep",
@@ -506,7 +695,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    status: 200,\n    message  : {\n       email       : \"foobar@example.com\"\n       username    : \"foobar\"\n       completeReg : false,\n       verified    : false\n\n    }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    status: 200,\n    message  : {\n       email       : \"foobar@example.com\"\n       username    : \"foobar\"\n       completeReg : false,\n       verified    : false\n    }\n}",
           "type": "json"
         }
       ]
