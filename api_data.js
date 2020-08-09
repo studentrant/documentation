@@ -399,7 +399,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 201 Created\n\n{\n   status  : 200,\n   message : Rant has been deleted succefully\n}",
+          "content": "HTTP/1.1 200 OK\n\n{\n   status  : 200,\n   message : Rant has been deleted succefully\n}",
           "type": "json"
         }
       ]
@@ -480,7 +480,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "      /rant/post/edit/eeee-ffff-0000-9999-gggg\n{\n   rant: \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n   tags: [ \"foo\", \"bar\"],\n   when: 1596978723642\n}",
+          "content": "/rant/post/edit/eeee-ffff-0000-9999-gggg\n{\n   rant: \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n   tags: [ \"foo\", \"bar\"],\n   when: 1596978723642\n}",
           "type": "json"
         }
       ]
@@ -647,7 +647,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 201 Created\n{\n    status: 201,\n    message  : {\n       tags        : [ \"foo\", \"bar\" ]\n       when        : 1596948381262\n       rantId      : \"eee-ffff-00000-1111-22222\",\n       rantPoster  : \"username\",\n       rant        : \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n       rantComments : [{}],\n       deleted      : false,\n       edit         : {\n          isEdited    : true,\n          editHistory : [\n                { when: 1596978723642 , diff: { value: \"Lorem ipsum\", removed: true, added: false} },\n                { when: 1596978723642 , diff: { value: \"L O\", removed: added: true } } \n           ]\n        diffAgainst: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n       },\n       rantUpVote   : 532,\n       rantDownVote : 7\n    }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    status: 200,\n    message  : {\n       tags        : [ \"foo\", \"bar\" ]\n       when        : 1596948381262\n       rantId      : \"eee-ffff-00000-1111-22222\",\n       rantPoster  : \"username\",\n       rant        : \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n       rantComments : [{}],\n       deleted      : false,\n       edit         : {\n          isEdited    : true,\n          editHistory : [\n                { when: 1596978723642 , diff: { value: \"Lorem ipsum\", removed: true, added: false} },\n                { when: 1596978723642 , diff: { value: \"L O\", removed: added: true } } \n           ]\n        diffAgainst: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n       },\n       rantUpVote   : 532,\n       rantDownVote : 7\n    }\n}",
           "type": "json"
         }
       ]
