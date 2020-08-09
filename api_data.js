@@ -353,7 +353,7 @@ define({ "api": [
   {
     "type": " delete ",
     "url": "/rant/post/delete/:rantId",
-    "title": "",
+    "title": "Delete Rant",
     "name": "deleteRant",
     "group": "Post_Rant",
     "version": "1.0.0",
