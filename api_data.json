@@ -438,6 +438,101 @@
     "groupTitle": "Post_Rant"
   },
   {
+    "type": " post ",
+    "url": "/rant/post/downvote/:rantId",
+    "title": "Downvote Rant",
+    "name": "downvoteRant",
+    "group": "Post_Rant",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "rantId",
+            "description": "<p>The rant id should be used as a param which will be represented as req.param.s, it's the unqiue identifier for teh rant the user wants to downvote</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "/rant/post/vote/downvote/eeee-ffff-0000-9999-gggg",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>HTTP status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Success response object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.rantUpvoteCount",
+            "description": "<p>Number of downvote</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.rantDownvoteCount",
+            "description": "<p>Number of downvotes</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   status  : 200,\n   message : {\n      rantUpvoteCount: 12,\n      rantDownvoteCount: 5\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_ID_IS_UNDEFINED",
+            "description": "<p>There is no id specified for the rant to modify</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_DOES_NOT_EXISTS",
+            "description": "<p>Rant to downvote does not exists</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_HAS_ALREADY_BEEN_DELETED",
+            "description": "<p>Rant to downvote has been deleted</p>"
+          }
+        ]
+      }
+    },
+    "filename": "doc/downvote-rant.doc.js",
+    "groupTitle": "Post_Rant"
+  },
+  {
     "type": " patch ",
     "url": "/rant/post/edit/:rantId",
     "title": "Edit Rant",
@@ -647,7 +742,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    status: 200,\n    message  : {\n       tags        : [ \"foo\", \"bar\" ]\n       when        : 1596948381262\n       rantId      : \"eee-ffff-00000-1111-22222\",\n       rantPoster  : \"username\",\n       rant        : \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n       rantComments : [{}],\n       deleted      : false,\n       edit         : {\n          isEdited    : true,\n          editHistory : [\n                { when: 1596978723642 , diff: { value: \"Lorem ipsum\", removed: true, added: false} },\n                { when: 1596978723642 , diff: { value: \"L O\", removed: added: true } } \n           ]\n        diffAgainst: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n       },\n       rantUpVote   : 532,\n       rantDownVote : 7\n    }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    status: 200,\n    message  : {\n       tags        : [ \"foo\", \"bar\" ]\n       when        : 1596948381262\n       rantId      : \"eee-ffff-00000-1111-22222\",\n       rantPoster  : \"username\",\n       rant        : \"L O dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n       rantComments : [{}],\n       deleted      : false,\n       edit         : {\n          isEdited    : true,\n          editHistory : [\n                { when: 1596978723642 , diff: { value: \"Lorem ipsum\", removed: true, added: false} },\n                { when: 1596978723642 , diff: { value: \"L O\", removed: added: true } }\n           ]\n        diffAgainst: \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\"\n       },\n       rantUpVote   : 532,\n       rantDownVote : 7\n    }\n}",
           "type": "json"
         }
       ]
@@ -725,6 +820,101 @@
       }
     },
     "filename": "doc/edit-rant.doc.js",
+    "groupTitle": "Post_Rant"
+  },
+  {
+    "type": " post ",
+    "url": "/rant/post/upvote/:rantId",
+    "title": "Upvote Rant",
+    "name": "upvoteRant",
+    "group": "Post_Rant",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "rantId",
+            "description": "<p>The rant id should be used as a param which will be represented as req.param.s, it's the unqiue identifier for teh rant the user wants to upvote</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "/rant/post/vote/upvote/eeee-ffff-0000-9999-gggg",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "status",
+            "description": "<p>HTTP status code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Success response object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.rantUpvoteCount",
+            "description": "<p>Number of upvote</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "number",
+            "optional": false,
+            "field": "message.rantDownvoteCount",
+            "description": "<p>Number of downvotes</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   status  : 200,\n   message : {\n      rantUpvoteCount: 12,\n      rantDownvoteCount: 5\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_ID_IS_UNDEFINED",
+            "description": "<p>There is no id specified for the rant to modify</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_DOES_NOT_EXISTS",
+            "description": "<p>Rant to upvote does not exists</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "RANT_HAS_ALREADY_BEEN_DELETED",
+            "description": "<p>Rant to upvote has been deleted</p>"
+          }
+        ]
+      }
+    },
+    "filename": "doc/upvote-rant.doc.js",
     "groupTitle": "Post_Rant"
   },
   {
