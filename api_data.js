@@ -825,7 +825,7 @@ define({ "api": [
   {
     "type": " get ",
     "url": "/rant/post/rant/:rantId",
-    "title": "Get one rant",
+    "title": "GetOne rant",
     "name": "getRant",
     "group": "Post_Rant",
     "version": "1.0.0",
@@ -1045,8 +1045,8 @@ define({ "api": [
   },
   {
     "type": " get ",
-    "url": "/rant/post/rants/?numRquest",
-    "title": "",
+    "url": "/rant/post/rants/?numRquest=0",
+    "title": "GetMore Rant",
     "name": "getRants",
     "group": "Post_Rant",
     "version": "1.0.0",
